@@ -184,17 +184,6 @@ Open 👉 `http://localhost:3000`
 * **Rushin**
 * **Dhanvi**
 
----
-
-## 🏆 Hackathon Impact
-
-💥 **Innovation:** AI + Real-time transport
-💥 **Scalability:** Can be deployed in any smart city
-💥 **Impact:** Reduces crowding & improves commuter experience
-💥 **Safety:** Integrated emergency system
-
----
-
 ## ⭐ Support
 
 If you like this project:
@@ -202,15 +191,4 @@ If you like this project:
 👉 Share with others
 👉 Build on top of it
 
----
-
-## ✨ Tagline
-
 > **“ByteBack – Bringing Intelligence Back to Public Transport.”**
-
----
-
-If you want, I can also make:
-✅ LinkedIn post for hackathon
-✅ PPT pitch content
-✅ GitHub badges + animations (to make it even cooler)
