@@ -1,9 +1,3 @@
-Here’s a **🔥 Hackathon-level Attractive README** tailored exactly to your project + your actual codebase:
-
----
-
-# ⚡ ByteBack – AI Powered BRTS Command Center
-
 🚀 *Smart Public Transport | Real-Time Intelligence | AI Driven Mobility*
 
 ---
