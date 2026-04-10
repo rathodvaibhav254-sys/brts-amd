@@ -1,0 +1,19 @@
+{
+  "name": "brts-backend-simulator",
+  "version": "1.0.0",
+  "description": "BRTS Ahmedabad Backend Simulator — writes real-time bus data to Firebase",
+  "main": "simulator.js",
+  "scripts": {
+    "start": "node simulator.js",
+    "dev":   "nodemon simulator.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
