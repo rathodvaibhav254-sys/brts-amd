@@ -1,182 +1,140 @@
-🚀 *Smart Public Transport | Real-Time Intelligence | AI Driven Mobility*
+# 🚌 ByteBack — Smart BRTS Command Center
+
+🚀 **Real-Time Intelligence | AI-Driven Mobility | Tactical Emergency Response**
 
 ---
 
 ## 🌟 Overview
 
-**ByteBack** is a next-generation **AI-based BRTS tracking and availability system** built to revolutionize urban public transportation.
+**ByteBack** is a next-generation **AI-based BRTS (Bus Rapid Transit System) Tracking and Command Center** designed for Ahmedabad's public transit network. Built on top of a real-time event-driven architecture, it translates raw transit signals into **actionable operational intelligence** for commuters and transit administrators alike.
 
-Our platform provides:
-🚌 **Live bus tracking**
-👥 **Real-time crowd estimation**
-🚨 **Emergency SOS system**
-📊 **Smart analytics dashboard**
-
-Unlike traditional systems, ByteBack transforms raw transit data into **actionable insights**, helping commuters travel smarter, safer, and faster.
+### Key Capabilities
+* 📍 **Live Vector Map:** Dynamic bus tracking with custom SVG status markers and real-time heading indicators using Leaflet.
+* 👥 **AI Crowd Estimation:** Real-time analysis categorizing passenger occupancy as *Low*, *Medium*, or *High*.
+* 🚨 **Tactical Emergency SOS:** One-click instant rescue trigger capturing passenger GPS coordinates and flagging the nearest bus.
+* 📊 **Smart Analytics Command Panel:** Live telemetry dashboards, average speed graphs, delay monitors, and active emergency resolution grids.
 
 ---
 
-## 🎯 Problem Statement
-
-Public transport suffers from:
-
-* ❌ No real-time bus visibility
-* ❌ Overcrowding uncertainty
-* ❌ Poor scheduling decisions
-* ❌ Lack of safety mechanisms
-
-👉 ByteBack solves all of these using **AI + Real-Time Data + Smart UI**
-
----
-
-## 💡 Solution
-
-We built a **Command Center Dashboard** that:
-
-* Tracks **live bus locations on map**
-* Shows **crowd levels (low / medium / high)**
-* Detects **delays & emergencies**
-* Provides **AI-based predictions**
-* Enables **SOS alerts with location tracking**
-
-The system runs on a **real-time Firebase backend** with a **simulated BRTS fleet system**.
-
----
-
-## 🧠 Key Features
-
-### 📍 Real-Time Bus Tracking
-
-* Live updates using Firebase listeners 
-* Smooth map visualization using Leaflet
-* Multi-route tracking system
-
-### 👥 AI Crowd Detection
-
-* Crowd levels: **Low / Medium / High** 
-* Helps users avoid overcrowded buses
-
-### 🚨 SOS & Safety System
-
-* One-click emergency alert
-* Sends:
-
-  * User location
-  * Bus details
-  * Emergency contacts
-* Integrated with Firebase alerts system 
-
-### 📊 Smart Dashboard
-
-* Live stats & analytics
-* Delay detection
-* System status monitoring
-
-### 🔐 Authentication System
-
-* Email/Password login
-* Google Sign-In
-* Role-based access (User/Admin) 
-
----
-
-## 🏗️ Architecture
+## 🏗️ System Architecture
 
 ```
-Backend Simulator (Node.js)
-        ↓
-Firebase Realtime Database
-        ↓
-Frontend Dashboard (Live UI)
+ ┌─────────────────────────────┐
+ │  Node.js Backend Simulator  │ ──(Admin SDK Write every 2-5s)──┐
+ └─────────────────────────────┘                                 │
+                                                                 ▼
+ ┌─────────────────────────────┐                       ┌───────────────────┐
+ │   React 19 Frontend App     │ ──(User SOS Write)──► │ Firebase Database │
+ └─────────────────────────────┘                       └───────────────────┘
+                │                                                │
+                └───────────(Real-time onValue Listener)─────────┘
 ```
 
-✔ Backend continuously updates bus data
-✔ Frontend listens in real-time
-✔ Users interact with live system
-
-(As defined in setup guide )
+1. **State Engine:** The standalone Node.js simulator periodically calculates bus physics (waypoint interpolation, congestion factor, average speed, crowd levels) and publishes them directly to Firebase.
+2. **Database:** Firebase Realtime Database handles synchronization across all clients with millisecond latency.
+3. **Command UI:** A React 19 single-page application built with a responsive Cyberpunk/Neon Tactical theme, featuring role-based dashboards (Commuters and Admin Operators).
 
 ---
 
 ## ⚙️ Tech Stack
 
-**Frontend**
-
-* HTML, CSS (Neon Tactical UI) 
-* JavaScript
-* Leaflet.js (Maps)
-* Chart.js (Analytics)
-
-**Backend**
-
-* Node.js Simulator 
-* Firebase Admin SDK
-
-**Database & Auth**
-
-* Firebase Realtime Database 
-* Firebase Authentication
+* **Frontend Framework:** React 19, Vite (for high-speed HMR)
+* **Visualizations:** Leaflet.js (Map layer), Chart.js (Operational Telemetry)
+* **Styling System:** CSS Grid / Flexbox (Tactical Neon theme with smooth glassmorphism and spring physics micro-animations)
+* **Backend Runtime:** Node.js, Firebase Admin SDK
+* **Database & Security:** Firebase Realtime Database, Security Rules (Role-based read/write gating)
+* **Identity Management:** Firebase Authentication (Email/Password & Google OAuth)
 
 ---
 
 ## 📂 Project Structure
 
 ```
-ByteBack/
-│── index.html
-│── style.css
-│── app.js
-│── firebase-config.js
-│── firebase-rules.json
-│── SCHEMA.md
-│── SETUP.md
-│
-└── backend/
-    ├── simulator.js
-    ├── package.json
+brts-amd/
+├── frontend/                # React 19 Frontend (Vite)
+│   ├── src/
+│   │   ├── components/      # UI Dashboard Panels (Fleet, Map, SOS, Admin, AI)
+│   │   ├── assets/          # Static assets & brand elements
+│   │   ├── firebase.js      # Client-side Firebase Initializer
+│   │   ├── App.jsx          # Dashboard Orchestrator
+│   │   ├── index.css        # Base Styles & Custom Variable System
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
+├── simulator.js             # standalone Node.js Bus Simulator (Backend)
+├── package.json             # Backend Simulator package configuration
+├── firebase-rules.json      # Gated Security Rules for Firebase Realtime DB
+├── SCHEMA.md                # Data Models & Schema definition
+└── SETUP.md                 # Detailed deployment instructions
 ```
 
 ---
 
-## 🚀 How to Run
+## 🚀 Quick Start Guide
 
-### 1️⃣ Setup Firebase
+### 1️⃣ Prerequisites
+Make sure you have [Node.js (v18+)](https://nodejs.org/) installed.
 
-* Create project
-* Enable Realtime DB + Auth
-* Add config in `firebase-config.js`
+### 2️⃣ Firebase Setup
+1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com).
+2. Enable **Realtime Database** (choose a close region like `asia-southeast1`).
+3. Enable **Authentication** and turn on **Email/Password** and **Google** sign-in methods.
+4. Set up database rules using the config in [firebase-rules.json](file:///c:/Users/User/OneDrive/Desktop/files(final)/files(final)/firebase-rules.json).
 
-### 2️⃣ Start Backend Simulator
-
-```bash
-npm install
-npm start
+### 3️⃣ Configure the Frontend
+Add your Firebase Web Configuration to `frontend/src/firebase.js`:
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
+};
 ```
 
-### 3️⃣ Run Frontend
+### 4️⃣ Start the Backend Simulator
+1. Go to the Firebase Console -> Project Settings -> Service Accounts.
+2. Click **Generate new private key** and download the JSON file.
+3. Save it as `serviceAccountKey.json` in the root folder.
+4. Install dependencies and start the simulator:
+   ```bash
+   npm install
+   npm start
+   ```
 
-```bash
-npx serve .
-```
-
-Open 👉 `http://localhost:3000`
+### 5️⃣ Run the React Frontend
+1. Open a new terminal and navigate to the frontend directory:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+2. Open the browser to the local server port printed in your console (usually `http://localhost:5173`).
 
 ---
 
-## 🔮 Future Scope
+## 🧠 Smart AI Predictions (Rules Engine)
+* **Delay Detection:** Triggers warning statuses if a bus's speed drops below 50% of its normal average.
+* **Traffic Alert:** Identifies heavy traffic if a bus's speed drops below 10 km/h.
+* **Crowd Forecasting:** Adapts passenger densities based on current morning/evening peak commuter hours.
+* **Capacity Advisory:** Alerts operators if multiple buses on a single route reach high crowd status concurrently.
 
-* 📱 Mobile App (React Native)
-* 🤖 Advanced AI prediction models
-* 🧭 Route optimization system
-* 🔔 Push notifications
-* 🛰️ Real GPS integration
+---
+
+## 👤 Admin Role Assignment
+By default, new sign-ups are assigned the `"user"` role. To upgrade an operator account to admin status:
+1. Log in to the application at least once to create your user node.
+2. Open the **Firebase Console -> Realtime Database**.
+3. Locate `users/{your-uid}/role` and change its value from `"user"` to `"admin"`.
+4. Refresh the application dashboard. The command panels and administrative tools will instantly load.
 
 ---
 
 ## 👨‍💻 Team ByteBack
-
-🔥 Built with passion by:
-
+Built with passion by:
 * **Hatim**
 * **Vaibhav**
 * **Krish**
@@ -184,11 +142,5 @@ Open 👉 `http://localhost:3000`
 * **Rushin**
 * **Dhanvi**
 
-## ⭐ Support
-
-If you like this project:
-👉 Star ⭐ the repo
-👉 Share with others
-👉 Build on top of it
-
-> **“ByteBack – Bringing Intelligence Back to Public Transport.”**
+---
+> **"ByteBack – Bringing Intelligence Back to Public Transport."**
