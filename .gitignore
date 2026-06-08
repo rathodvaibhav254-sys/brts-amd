@@ -1,4 +1,15 @@
-serviceAccountKey.json
-node_modules/
-.env
+# Backend
+backend/serviceAccountKey.json
+backend/node_modules/
+backend/.env
 
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Root / General
+.env
+.DS_Store
+.vscode/
